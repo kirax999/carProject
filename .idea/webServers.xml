@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b4ea087a-3940-4c90-82b7-357d48904f31" name="Raspberry" url="http://192.168.1.103">
+        <fileTransfer host="192.168.1.103" port="22" rootFolder="/home/pi/Desktop/carProject" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
