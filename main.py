@@ -6,8 +6,10 @@ import phony.base.ipc
 import phony.audio.alsa
 import phony.bluetooth.adapters
 import phony.bluetooth.profiles.handsfree
+from phony.base import log
 import pdb
 from Tkinter import *
+import glibc
 import ip
 import cv2
 """
@@ -21,13 +23,13 @@ window = Tk()
 
 # interface racine
 
-champ_label = Label(window, text="Citroen C3 PiProject")
+"""champ_label = Label(window, text="Citroen C3 PiProject")"""
 """window.attributes('-fullscreen', True)"""
-bouton_quitter = Button(window, text="Exit", command=window.quit())
+"""bouton_quitter = Button(window, text="Exit", command=window.quit())"""
 
 #Add button
-bouton_quitter.pack()
-champ_label.pack()
+"""bouton_quitter.pack()"""
+"""champ_label.pack()"""
 """addr_ip.pack()"""
 
 #start window loop
@@ -52,7 +54,11 @@ class ExampleHeadsetService:
         print 'Call ended: %s' % call
         self._call_in_progress = False
 
+
+
     def start(self):
+        level = log.Levels.parse('DEBUG')
+        log.send_to_stdout(level=level)
         bus = phony.base.ipc.BusProvider()
         with phony.bluetooth.adapters.Bluez5(bus) as adapter, \
                 phony.bluetooth.profiles.handsfree.Ofono(bus) as hfp, \
@@ -62,13 +68,12 @@ class ExampleHeadsetService:
             hs.on_incoming_call(self.incoming_call)
             hs.on_call_began(self.call_began)
             hs.on_call_ended(self.call_ended)
-
-            hs.start('Citroen C3', pincode='1234')
-            hs.enable_pairability(timeout=30)
-
+            hs.start('Citroen C3', pincode='0000')
+            hs.enable_pairability(timeout=0)
             self._hs = hs
-            """gobject.MainLoop()"""
-            window.mainloop()
+            gobject.MainLoop().run()
+            """glibc.MainLoop()"""
+            """window.mainloop()"""
             print 'loop started'
 
     def voice_dial(self):
@@ -79,4 +84,6 @@ class ExampleHeadsetService:
 
 
 base = ExampleHeadsetService()
+print 'work'
 ExampleHeadsetService.start(base)
+print 'work2'
