@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.ListCamera = new System.Windows.Forms.ComboBox();
+            this.cameraViewer = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // ListCamera
@@ -40,14 +42,24 @@
             this.ListCamera.TabIndex = 0;
             this.ListCamera.SelectedIndexChanged += new System.EventHandler(this.ListCamera_SelectedIndexChanged);
             // 
+            // cameraViewer
+            // 
+            this.cameraViewer.Location = new System.Drawing.Point(0, 27);
+            this.cameraViewer.Name = "cameraViewer";
+            this.cameraViewer.Size = new System.Drawing.Size(558, 339);
+            this.cameraViewer.TabIndex = 1;
+            this.cameraViewer.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 368);
+            this.Controls.Add(this.cameraViewer);
             this.Controls.Add(this.ListCamera);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.cameraViewer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -55,6 +67,7 @@
         #endregion
 
         private System.Windows.Forms.ComboBox ListCamera;
+        private System.Windows.Forms.PictureBox cameraViewer;
     }
 }
 

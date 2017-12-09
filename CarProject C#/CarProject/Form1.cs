@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using DirectShowLib;
+using Emgu.CV;
+using Emgu.CV.UI;
+using Emgu.CV.Structure;
 
 namespace CarProject
 {
     public partial class Form1 : Form
     {
+        Capture capture = null;
         public Form1() {
             InitializeComponent();
 
@@ -25,29 +29,39 @@ namespace CarProject
             }
             if (this.ListCamera.Items.Count > 0) {
                 this.ListCamera.SelectedIndex = 0;
+                //CameraCapture(0);
             }
         }
 
         private void ListCamera_SelectedIndexChanged(object sender, EventArgs e) {
             if (this.ListCamera.SelectedItem == null) return;
             var b = (objectCameraList)this.ListCamera.SelectedItem;
+            CameraCapture(b.id);
+        }
+
+        public void CameraCapture(int id)
+        {
+            if (capture != null)
+                capture.Stop();
+            capture = new Capture(id);
+            Application.Idle += new EventHandler(delegate (object sender, EventArgs e) {
+                this.cameraViewer.Image = capture.QueryFrame().ToImage<Bgr, Byte>().ToBitmap();
+            });
         }
 
         class objectCameraList
         {
             String name;
             Guid guid;
-            int id;
+            public int id { get; }
 
-            public objectCameraList(String name, int id, Guid guid)
-            {
+            public objectCameraList(String name, int id, Guid guid) {
                 this.name = name;
                 this.id = id;
                 this.guid = guid;
             }
 
-            public override string ToString()
-            {
+            public override string ToString() {
                 return name;
             }
         }
