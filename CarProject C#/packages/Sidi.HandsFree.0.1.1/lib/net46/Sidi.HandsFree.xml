@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sidi.HandsFree</name>
+    </assembly>
+    <members>
+        <member name="T:Sidi.HandsFree.AtCommandConnection">
+            <summary>
+            AT command connection according to AT command set for User Equipment (UE) (3GPP TS 27.007 version 6.8.0 Release 6)
+            </summary>
+        </member>
+        <member name="T:Sidi.HandsFree.ServiceLevelConnection">
+            <summary>
+            HFP Service Level Connection
+            </summary>
+        </member>
+        <member name="M:Sidi.HandsFree.ServiceLevelConnection.Connect(System.String)">
+            <summary>
+            Tries to establish a service level connection to the registered Bluetooth device deviceName.
+            </summary>
+            <param name="deviceName">If null, connect to the first registered device that supports HFP</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
