@@ -18,7 +18,7 @@ namespace CarProject
         [STAThread]
         static void Main()
         {
-            CameraCapture();
+            //CameraCapture();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
@@ -27,7 +27,7 @@ namespace CarProject
         public static void CameraCapture()
         {
             ImageViewer viewer = new ImageViewer(); //create an image viewer
-            Capture capture = new Capture(); //create a camera captue
+            Capture capture = new Capture(1); //create a camera captue
             Application.Idle += new EventHandler(delegate (object sender, EventArgs e)
             {  //run this until application closed (close button click on image viewer)
                 viewer.Image = capture.QueryFrame(); //draw the image obtained from camera
