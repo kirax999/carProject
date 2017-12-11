@@ -88,8 +88,12 @@ namespace CarProject
             if (capture != null)
                 capture.Stop();
             capture = new Capture(id);
+            
+            decimal ratio = System.Convert.ToDecimal(capture.Width) / System.Convert.ToDecimal(capture.Height);
+            decimal sizeW = System.Convert.ToDecimal(widhtView) / ratio;
+            
             Application.Idle += new EventHandler(delegate (object sender, EventArgs e) {
-                this.cameraViewer.Image = capture.QueryFrame().ToImage<Bgr, Byte>().Resize(widhtView, heightView, Inter.Linear).ToBitmap();
+                this.cameraViewer.Image = capture.QueryFrame().ToImage<Bgr, Byte>().Resize(System.Convert.ToInt32(sizeW), (heightView), Inter.Linear).ToBitmap();
             });
         }
 
