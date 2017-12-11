@@ -36,17 +36,19 @@
             // ListCamera
             // 
             this.ListCamera.FormattingEnabled = true;
-            this.ListCamera.Location = new System.Drawing.Point(0, 0);
+            this.ListCamera.Location = new System.Drawing.Point(0, 222);
             this.ListCamera.Name = "ListCamera";
-            this.ListCamera.Size = new System.Drawing.Size(558, 21);
+            this.ListCamera.Size = new System.Drawing.Size(400, 21);
             this.ListCamera.TabIndex = 0;
             this.ListCamera.SelectedIndexChanged += new System.EventHandler(this.ListCamera_SelectedIndexChanged);
             // 
             // cameraViewer
             // 
-            this.cameraViewer.Location = new System.Drawing.Point(0, 27);
+            this.cameraViewer.Location = new System.Drawing.Point(0, 0);
+            this.cameraViewer.MinimumSize = new System.Drawing.Size(400, 216);
             this.cameraViewer.Name = "cameraViewer";
-            this.cameraViewer.Size = new System.Drawing.Size(558, 339);
+            this.cameraViewer.Size = new System.Drawing.Size(400, 216);
+            this.cameraViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.cameraViewer.TabIndex = 1;
             this.cameraViewer.TabStop = false;
             // 
@@ -54,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 368);
+            this.ClientSize = new System.Drawing.Size(784, 441);
             this.Controls.Add(this.cameraViewer);
             this.Controls.Add(this.ListCamera);
             this.Name = "Form1";
