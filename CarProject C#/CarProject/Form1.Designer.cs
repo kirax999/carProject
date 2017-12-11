@@ -40,7 +40,6 @@
             this.ListCamera.Name = "ListCamera";
             this.ListCamera.Size = new System.Drawing.Size(400, 21);
             this.ListCamera.TabIndex = 0;
-            this.ListCamera.SelectedIndexChanged += new System.EventHandler(this.ListCamera_SelectedIndexChanged);
             // 
             // cameraViewer
             // 
