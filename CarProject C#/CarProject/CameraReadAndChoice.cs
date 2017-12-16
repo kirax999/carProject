@@ -25,6 +25,7 @@ namespace CarProject
             DsDevice[] SystemCamereas = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
 
             this.ListCamera.SelectedIndexChanged += new System.EventHandler(this.ListCamera_SelectedIndexChanged);
+            this.cameraViewer.Click += new System.EventHandler(this.ListCamera_Click);
 
             for (int i = 0; i < SystemCamereas.Length; i++)
             {
@@ -36,7 +37,7 @@ namespace CarProject
                 this.ListCamera.SelectedIndex = 0;
             }
         }
-
+        
         public void CameraCapture(int id, int widhtView, int heightView)
         {
             if (capture != null)
@@ -81,6 +82,14 @@ namespace CarProject
             {
                 CameraCapture(b.id, cameraImage.Size.Width, cameraImage.Size.Height);
             }
+        }
+
+        private void ListCamera_Click(object sender, EventArgs e)
+        {
+            /*
+            new Form();
+            throw new NotImplementedException();
+            */
         }
     }
 }

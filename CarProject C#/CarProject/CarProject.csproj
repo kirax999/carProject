@@ -83,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bluetoothServices.cs" />
     <Compile Include="CameraReadAndChoice.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
