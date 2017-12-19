@@ -18,13 +18,15 @@ namespace CarProject
 {
     public partial class Form1 : Form
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
         public Form1() {
             InitializeComponent();
 
-            //new CameraReadAndChoice(this.ListCamera, this.cameraViewer);
-            bluetoothServices.start_bluetooth();
+            var carBlue = new bluetoothServices();
+
+            System.Threading.Thread blueThread = new Thread(new ThreadStart(() => carBlue.start_bluetooth()));
+            blueThread.Start();
+            new CameraReadAndChoice(this.ListCamera, this.cameraViewer);
         }
     }
 }

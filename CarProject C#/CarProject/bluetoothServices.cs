@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using Sidi.HandsFree;
 
 using System.Threading;
-using InTheHand.Net.Sockets;
+using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace CarProject {
 
     class bluetoothServices {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private SimpleDialer dialer = null;
 
         public void start_bluetooth()
         {
-            /*
-             * Bluetooth discover
-             */
+            //
+            // Bluetooth discover
+            //
+            log4net.Config.BasicConfigurator.Configure();
             List<Device> devices = new List<Device>();
             InTheHand.Net.Sockets.BluetoothClient bc = new InTheHand.Net.Sockets.BluetoothClient();
             InTheHand.Net.Sockets.BluetoothDeviceInfo[] array = bc.DiscoverDevices();
@@ -28,16 +30,75 @@ namespace CarProject {
             {
                 Device device = new Device(array[i]);
                 devices.Add(device);
-                Console.Write("" + (i + 1) + ": " + device.ToString() + "\n");
+                Debug.Write("" + (i + 1) + ": " + device.ToString() + "\n");
             }
-            Console.Write("Please enter the device numbers\n");
-            var choiceDevice = Convert.ToInt32(Console.ReadLine());
 
-            /* ***************************** */
+            // ***************************** //
 
             var d = new SimpleDialer();
-            d.Dial("1", devices[/*choiceDevice - 1*/0].DeviceName).Wait(); /* Apply parameter */
-            Thread.Sleep(TimeSpan.FromSeconds(30));
+
+            System.Threading.Thread myThread;
+            myThread = new Thread(new ThreadStart(async () => await tryCommandAsync(d)));
+            myThread.Start();
+            Console.WriteLine("-*-*-*-*-" + devices[0].DeviceName + "-*-*-*-*-");
+            d.Dial("Alexandre's iPhone" /*devices[0].DeviceName*/).Wait();
+            // ***************************** //
+        }
+
+        private void followData() {
+
+        }
+
+        async Task<int> tryCommandAsync(Sidi.HandsFree.SimpleDialer d) {
+            var slc = d.getServiceBase();
+
+            while (slc == null) {
+                slc = d.getServiceBase();
+            }
+
+            int i = 0;
+            for (; ; )
+            {
+                switch (i)
+                {
+                    case 1:
+                        Console.Write(slc.Battery);
+                        break;
+                    case 2:
+                        await slc.Dial("+33689426948");
+                        break;
+                    case 3:
+                        await slc.CallHangUp();
+                        break;
+                    default:
+                        ;
+                        break;
+                }
+                i = 0;
+            }
+
+            /*
+            using (slc)
+            {
+                Debug.WriteLine(await slc.GetManufacturerIdentification());
+                Debug.WriteLine(await slc.GetModelIdentification());
+                Debug.WriteLine(await slc.GetSerialNumberIdentification());
+                Debug.WriteLine(await slc.GetNetworkOperator());
+                Debug.WriteLine(await slc.GetSubscriberNumber());
+                Debug.WriteLine(slc.IsService);
+                Debug.WriteLine(slc.IsCall);
+                Debug.WriteLine(slc.CallSetup);
+                Debug.WriteLine(slc.CallHeld);
+                Debug.WriteLine(slc.Signal);
+                Debug.WriteLine(slc.Battery);
+
+
+                await slc.Dial("+33689426948");
+
+                await slc.CallHangUp();
+            }
+            */
+            return 0;
         }
 
         public class Device {

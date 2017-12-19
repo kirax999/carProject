@@ -53,7 +53,6 @@ C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\log4net.dll
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\OpenCV.Net.dll
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\OpenTK.dll
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\OpenTK.GLControl.dll
-C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\Sidi.HandsFree.dll
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\ZedGraph.dll
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\DirectShowLib.pdb
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\Emgu.CV.UI.xml
@@ -64,7 +63,6 @@ C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\log4net.xml
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\OpenCV.Net.xml
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\OpenTK.xml
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\OpenTK.GLControl.xml
-C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\Sidi.HandsFree.xml
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\ZedGraph.xml
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\de\ZedGraph.resources.dll
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\es\ZedGraph.resources.dll
@@ -86,3 +84,4 @@ C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\obj\Debug\CarProject.
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\obj\Debug\CarProject.csproj.CoreCompileInputs.cache
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\obj\Debug\CarProject.exe
 C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\obj\Debug\CarProject.pdb
+C:\Users\alexa\Desktop\carProject\CarProject C#\CarProject\bin\Debug\Sprache.dll
