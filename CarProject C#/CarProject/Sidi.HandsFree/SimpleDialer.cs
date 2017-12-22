@@ -31,8 +31,7 @@ namespace Sidi.HandsFree
             }
          }
 
-        public ServiceLevelConnection getServiceBase()
-        {
+        public ServiceLevelConnection getServiceBase() {
             return slc;
         }
     }

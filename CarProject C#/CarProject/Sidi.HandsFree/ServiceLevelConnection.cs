@@ -83,23 +83,21 @@ namespace Sidi.HandsFree
             var devices = client.DiscoverDevices(10, true, true, false);
             var slc = devices
                 .Where(x => deviceName == null || string.Equals(x.DeviceName, deviceName))
-                .Select(device =>
-                {
+                .Select(device => {
                     try
                     {
-                        var ep = new BluetoothEndPoint(device.DeviceAddress, BluetoothService.Handsfree);
+                        var ep = new BluetoothEndPoint(device.DeviceAddress, BluetoothService.HeadsetAudioGateway);
                         var cli = new BluetoothClient();
                         cli.Connect(ep);
                         var s = cli.GetStream();
+                        
                         return new ServiceLevelConnection(s);
                     }
-                    catch
-                    {
+                    catch {
                         return null;
                     }
                 })
                 .First(_ => _ != null);
-
             await slc.Establish();
             return slc;
         }

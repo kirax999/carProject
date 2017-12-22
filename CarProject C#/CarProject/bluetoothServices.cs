@@ -37,19 +37,14 @@ namespace CarProject {
 
             var d = new SimpleDialer();
 
-            System.Threading.Thread myThread;
-            myThread = new Thread(new ThreadStart(async () => await tryCommandAsync(d)));
+            System.Threading.Thread myThread = new Thread(new ThreadStart(async () => await tryCommandAsync(d)));
             myThread.Start();
             Console.WriteLine("-*-*-*-*-" + devices[0].DeviceName + "-*-*-*-*-");
             d.Dial("Alexandre's iPhone" /*devices[0].DeviceName*/).Wait();
             // ***************************** //
         }
 
-        private void followData() {
-
-        }
-
-        async Task<int> tryCommandAsync(Sidi.HandsFree.SimpleDialer d) {
+        public async Task tryCommandAsync(Sidi.HandsFree.SimpleDialer d) {
             var slc = d.getServiceBase();
 
             while (slc == null) {
@@ -98,7 +93,6 @@ namespace CarProject {
                 await slc.CallHangUp();
             }
             */
-            return 0;
         }
 
         public class Device {
