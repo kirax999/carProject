@@ -38,7 +38,7 @@ namespace Sidi.HandsFree
 
         readonly AtCommandConnection at;
 
-        public AtCommandConnection At { get { return at; } } 
+        public AtCommandConnection At { get { return at; } }
 
         public ServiceLevelConnection(Stream stream)
         {
@@ -81,24 +81,19 @@ namespace Sidi.HandsFree
         {
             var client = new BluetoothClient();
             var devices = client.DiscoverDevices(10, true, true, false);
-            var slc = devices
-                .Where(x => deviceName == null || string.Equals(x.DeviceName, deviceName))
-                .Select(device => {
-                    try
-                    {
-                        var ep = new BluetoothEndPoint(device.DeviceAddress, BluetoothService.HeadsetAudioGateway);
-                        var cli = new BluetoothClient();
-                        cli.Connect(ep);
-                        var s = cli.GetStream();
-                        
-                        return new ServiceLevelConnection(s);
-                    }
-                    catch {
-                        return null;
-                    }
-                })
-                .First(_ => _ != null);
-            await slc.Establish();
+
+            ServiceLevelConnection slc = null;
+            foreach (BluetoothDeviceInfo device in devices) {
+                if (device.DeviceName != null && string.Equals(device.DeviceName, deviceName)) {
+                    var ep = new BluetoothEndPoint(device.DeviceAddress, BluetoothService.Handsfree);
+                    var cli = new BluetoothClient();
+                    cli.Connect(ep);
+                    var s = cli.GetStream();
+                    slc = new ServiceLevelConnection(s);
+                }
+            }
+            if (slc != null)
+                await slc.Establish();
             return slc;
         }
 
@@ -123,8 +118,7 @@ namespace Sidi.HandsFree
                 if (p == null)
                 {
                     log.DebugFormat("Unknown indicator: {0}", i);
-                }
-                else
+                } else
                 {
                     p.SetValue(this, i);
                 }
@@ -187,15 +181,17 @@ namespace Sidi.HandsFree
 
         public async Task<string> GetNetworkOperator()
         {
-            try {
+            try
+            {
                 await at.Command("+COPS=3,0");
                 var pop = await at.Get("+COPS?");
                 return SupportedIndicatorsParser.CommaSeparatedStrings.Parse(pop)[2];
-            } catch {
+            } catch
+            {
                 return "";
             }
         }
-        
+
         public async Task Dial(string number)
         {
             await at.Command("D" + number + ";");
@@ -206,10 +202,8 @@ namespace Sidi.HandsFree
         /// </summary>
         /// <value>=false implies no service.No Home/Roam network available.
         /// <value>=true implies presence of service.Home/Roam network available.
-        public bool IsService
-        {
-            get
-            {
+        public bool IsService {
+            get {
                 return serviceIndicator.CurrentValue == 1;
             }
         }
@@ -217,10 +211,8 @@ namespace Sidi.HandsFree
         /// <summary>
         /// Standard call status indicator
         /// </summary>
-        public bool IsCall
-        {
-            get
-            {
+        public bool IsCall {
+            get {
                 return callIndicator.CurrentValue == 1;
             }
         }
@@ -228,10 +220,8 @@ namespace Sidi.HandsFree
         /// <summary>
         /// Bluetooth proprietary call set up status indicator
         /// </summary>
-        public CallSetupStatus CallSetup 
-        {
-            get
-            {
+        public CallSetupStatus CallSetup {
+            get {
                 return (CallSetupStatus)callsetupIndicator.CurrentValue;
             }
         }
@@ -239,21 +229,17 @@ namespace Sidi.HandsFree
         /// <summary>
         /// Bluetooth proprietary call hold status indicator.
         /// </summary>
-        public CallHeldStatus CallHeld
-        {
-            get
-            {
-                return (CallHeldStatus) callheldIndicator.CurrentValue;
+        public CallHeldStatus CallHeld {
+            get {
+                return (CallHeldStatus)callheldIndicator.CurrentValue;
             }
         }
 
         /// <summary>
         /// Signal strength, 0-5
         /// </summary>
-        public int Signal
-        {
-            get
-            {
+        public int Signal {
+            get {
                 return signalIndicator.CurrentValue;
             }
         }
@@ -261,10 +247,8 @@ namespace Sidi.HandsFree
         /// <summary>
         /// Battery level, 0-5
         /// </summary>
-        public int Battery
-        {
-            get
-            {
+        public int Battery {
+            get {
                 return battchgIndicator.CurrentValue;
             }
         }

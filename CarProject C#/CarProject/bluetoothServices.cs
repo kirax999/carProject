@@ -40,7 +40,7 @@ namespace CarProject {
             System.Threading.Thread myThread = new Thread(new ThreadStart(async () => await tryCommandAsync(d)));
             myThread.Start();
             Console.WriteLine("-*-*-*-*-" + devices[0].DeviceName + "-*-*-*-*-");
-            d.Dial("Alexandre's iPhone" /*devices[0].DeviceName*/).Wait();
+            d.Dial("Alexandre's iPhone").Wait();
             // ***************************** //
         }
 
