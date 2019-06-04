@@ -3,7 +3,6 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 
 def main():
-
     # Initialize OpenGL
     glutInit(sys.argv)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)
@@ -36,8 +35,10 @@ def display():
     # Draw a green line
     glBegin(GL_LINES)
     glColor3f(0.0,100.0,0.0)
-    glVertex2f(1.0, 1.0)
-    glVertex2f(-1.0, -1.0)
+    glVertex2f(0, 1)
+    glVertex2f(0, -1)
+    glVertex2f(1, 0)
+    glVertex2f(-1, 0)
     glEnd()
 
     glutSwapBuffers()
