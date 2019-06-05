@@ -1,14 +1,14 @@
 import pygame
-import WindowManager
-import camera
+import WindowManagerPiC
 from pygame.locals import *
 
 #Initialisation de la bibliothèque Pygame
 pygame.init()
 
-windowManager = WindowManager.WindowManager()
+windowManager = WindowManagerPiC.WindowManagerPiC()
 
 windowManager.loopMain()
+
 """
 font = pygame.font.Font('Resources/fonts/OpenSans-Regular.ttf', 10)
 text = font.render('GeeksForGeeks', True, green, blue)
